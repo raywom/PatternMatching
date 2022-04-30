@@ -22,6 +22,7 @@ public class KMP
     {
         int[] pf = GetPrefix(pattern);
         int index = 0;
+        int count = 0;
 
         for (int i = 0; i < text.Length; i++)
         {
@@ -33,10 +34,11 @@ public class KMP
             if (pattern[index] == text[i]) index++;
             if (index == pattern.Length)
             {
-                return i - index + 1;
+                count++;
+                index = pf[index - 1];
             }
         }
-
-        return -1;
+        
+        return count == 0 ? -1 : count;
     }
 }

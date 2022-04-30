@@ -6,6 +6,7 @@ public static class Bruteforce
     {
         var matchStartIndex = 0;
         var lastElementIndex = pattern.Length - 1;
+        int count = 0;
         while (matchStartIndex < text.Length - lastElementIndex)
         {
             var stepOverTextIndex = 0;
@@ -16,12 +17,12 @@ public static class Bruteforce
 
             if (stepOverTextIndex == pattern.Length)
             {
-                return matchStartIndex;
+                count++;
             }
 
             matchStartIndex++;
         }
 
-        return -1;
+        return count == 0 ? -1 : count;
     }
 }

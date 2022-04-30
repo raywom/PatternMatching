@@ -4,42 +4,47 @@ public static class FSM
 {
     public static int FSMFunc(string text, string pattern)
     {
-        int i;
-        var state = 0;
-        var states = new int[pattern.Length];
-        var symbols = new int[pattern.Length];
+        int count = 0;
 
-        for (i = 0; i < pattern.Length; i++)
+        int[][] machine = new int[pattern.Length + 1][];
+        for (int array1 = 0; array1 < pattern.Length + 1; array1++)
         {
-            states[i] = 0;
-            symbols[i] = pattern[i];
+            machine[array1] = new int[256];
         }
 
-        while (i < text.Length)
+        for (int state = 0; state <= pattern.Length; ++state)
+        for (int x = 0; x < 256; ++x)
+            machine[state][x] = GetNextStateOfEngine(pattern, state, x);
+
+        int checker = 0;
+        foreach (var t in text)
         {
-            if (text[i] == pattern[state])
+            checker = machine[checker][t];
+            if (checker == pattern.Length)
+                count++;
+        }
+
+        return count == 0 ? -1 : count;
+    }
+    
+    static int GetNextStateOfEngine(string pattern, int state, int x)
+    {
+        if (state < pattern.Length && x == pattern[state])
+            return state + 1;
+
+        for (int j = state; j > 0; j--)
+        {
+            if (pattern[j - 1] == x)
             {
-                i++;
-                state++;
-            }
-            else
-            {
-                if (state > 0)
-                {
-                    state = states[state - 1];
-                }
-                else
-                {
-                    i++;
-                }
+                int i;
+                for (i = 0; i < j - 1; i++)
+                    if (pattern[i] != pattern[state - j + 1 + i])
+                        break;
+                if (i == j - 1)
+                    return j;
             }
         }
 
-        if (state == pattern.Length)
-        {
-            return i - pattern.Length;
-        }
-
-        return -1;
+        return 0;
     }
 }

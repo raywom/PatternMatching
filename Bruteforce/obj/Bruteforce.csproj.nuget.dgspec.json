@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rkuan\\Desktop\\Bruteforce\\Bruteforce\\Bruteforce.csproj": {}
+    "C:\\Users\\rkuan\\Desktop\\Bruteforce\\PatternMatching\\Bruteforce\\Bruteforce.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rkuan\\Desktop\\Bruteforce\\Bruteforce\\Bruteforce.csproj": {
+    "C:\\Users\\rkuan\\Desktop\\Bruteforce\\PatternMatching\\Bruteforce\\Bruteforce.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rkuan\\Desktop\\Bruteforce\\Bruteforce\\Bruteforce.csproj",
+        "projectUniqueName": "C:\\Users\\rkuan\\Desktop\\Bruteforce\\PatternMatching\\Bruteforce\\Bruteforce.csproj",
         "projectName": "Bruteforce",
-        "projectPath": "C:\\Users\\rkuan\\Desktop\\Bruteforce\\Bruteforce\\Bruteforce.csproj",
+        "projectPath": "C:\\Users\\rkuan\\Desktop\\Bruteforce\\PatternMatching\\Bruteforce\\Bruteforce.csproj",
         "packagesPath": "C:\\Users\\rkuan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rkuan\\Desktop\\Bruteforce\\Bruteforce\\obj\\",
+        "outputPath": "C:\\Users\\rkuan\\Desktop\\Bruteforce\\PatternMatching\\Bruteforce\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\rkuan\\AppData\\Roaming\\NuGet\\NuGet.Config"
