@@ -19,15 +19,15 @@ namespace Bruteforce
             {
                 T1 = reader.ReadToEnd();
             }
-            string path = "FSM.csv";
+            string path = "RabinCarp.csv";
             Stopwatch sw = new Stopwatch();
-            FSM.FSMFunc(T, P);
+            RabinCarp.RabinCarpFunc(T, P);
             List<double> times = new List<double>();
             for (int i = 0; i < 50; i++)
             {
                 sw = Stopwatch.StartNew();
                 sw.Start();
-                FSM.FSMFunc(T, P);
+                RabinCarp.RabinCarpFunc(T, P);
                 sw.Stop();
                 times.Add(sw.ElapsedTicks);
             }
@@ -36,7 +36,7 @@ namespace Bruteforce
             {
                 sw = Stopwatch.StartNew();
                 sw.Start();
-                FSM.FSMFunc(T1, P1);
+                RabinCarp.RabinCarpFunc(T1, P1);
                 sw.Stop();
                 times2.Add(sw.ElapsedTicks);
             }
