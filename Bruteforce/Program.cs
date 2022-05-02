@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace Bruteforce
 {
@@ -12,16 +11,17 @@ namespace Bruteforce
             KMP.KMPFunc("123", "123");
             FSM.FSMFunc("123", "123");
             RabinKarp.RabinCarpOptimized("123", "123");
-
         }
+
         static void Main(string[] args)
         {
             string P = "rewq";
             string T, TCopy;
             string pathToWrite = "Algos.csv";
+
             int times = 5000;
-            
-            
+
+
             using (StreamReader reader = new StreamReader("file1.txt"))
             {
                 T = reader.ReadToEnd();
@@ -29,7 +29,7 @@ namespace Bruteforce
 
             TCopy = T;
             int textLength = TCopy.Length;
-            
+
             Initialize();
 
             List<double> timesBruteforce = new List<double>();
@@ -37,7 +37,7 @@ namespace Bruteforce
             List<double> timesKMP = new List<double>();
             List<double> timesRabinCarp = new List<double>();
             List<double> timesSunday = new List<double>();
-            
+
             Stopwatch sw = new Stopwatch();
             for (int i = 0; i < times; i++)
             {
@@ -45,27 +45,27 @@ namespace Bruteforce
                 sw.Start();
                 Bruteforce.BruteforceFunc(T, P);
                 sw.Stop();
-                timesBruteforce.Add((int)sw.ElapsedTicks * 100);
+                timesBruteforce.Add((int) sw.ElapsedTicks * 100);
                 sw = Stopwatch.StartNew();
                 sw.Start();
                 FSM.FSMFunc(T, P);
                 sw.Stop();
-                timesFSM.Add((int)sw.ElapsedTicks * 100);
+                timesFSM.Add((int) sw.ElapsedTicks * 100);
                 sw = Stopwatch.StartNew();
                 sw.Start();
                 KMP.KMPFunc(T, P);
                 sw.Stop();
-                timesKMP.Add((int)sw.ElapsedTicks * 100);
-                sw = Stopwatch.StartNew(); 
+                timesKMP.Add((int) sw.ElapsedTicks * 100);
+                sw = Stopwatch.StartNew();
                 sw.Start();
                 RabinKarp.RabinCarpOptimized(T, P);
                 sw.Stop();
-                timesRabinCarp.Add((int)sw.ElapsedTicks * 100);
+                timesRabinCarp.Add((int) sw.ElapsedTicks * 100);
                 sw = Stopwatch.StartNew();
                 sw.Start();
                 Sunday.SundayFunc(T, P);
                 sw.Stop();
-                timesSunday.Add((int)sw.ElapsedTicks * 100);
+                timesSunday.Add((int) sw.ElapsedTicks * 100);
                 T += TCopy;
             }
 
@@ -73,7 +73,9 @@ namespace Bruteforce
             writer.WriteLine("textSize, RT BruteForce, RT FSM, \tRT KMP, \tRT RabinKarp, RT Sunday");
             for (var index = 0; index < times; index++)
             {
-                writer.WriteLine(textLength + ",\t   " + timesBruteforce[index] + ",\t   " + timesFSM[index] + ",\t   " + timesKMP[index] + ",\t   " + timesRabinCarp[index] + ",\t   " + timesSunday[index]);
+                writer.WriteLine(textLength + ",\t   " + timesBruteforce[index] + ",\t   " + timesFSM[index] +
+                                 ",\t   " + timesKMP[index] + ",\t   " + timesRabinCarp[index] + ",\t   " +
+                                 timesSunday[index]);
                 textLength += TCopy.Length;
             }
         }
