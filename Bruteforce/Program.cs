@@ -5,55 +5,77 @@ namespace Bruteforce
 {
     internal class Program
     {
+        static void Initialize()
+        {
+            Bruteforce.BruteforceFunc("123", "123");
+            Sunday.SundayFunc("123", "123");
+            KMP.KMPFunc("123", "123");
+            FSM.FSMFunc("123", "123");
+            RabinKarp.RabinCarpOptimized("123", "123");
+
+        }
         static void Main(string[] args)
         {
-            
             string P = "rewq";
-            string T, T1;
-            string P1 = "vel";
+            string T, TCopy;
+            string pathToWrite = "Algos.csv";
+            int times = 5000;
+            
+            
             using (StreamReader reader = new StreamReader("file1.txt"))
             {
                 T = reader.ReadToEnd();
             }
-            using (StreamReader reader = new StreamReader("file2.txt"))
-            {
-                T1 = reader.ReadToEnd();
-            }
-            string path = "RabinCarp.csv";
+
+            TCopy = T;
+            int textLength = TCopy.Length;
+            
+            Initialize();
+
+            List<double> timesBruteforce = new List<double>();
+            List<double> timesFSM = new List<double>();
+            List<double> timesKMP = new List<double>();
+            List<double> timesRabinCarp = new List<double>();
+            List<double> timesSunday = new List<double>();
+            
             Stopwatch sw = new Stopwatch();
-            RabinCarp.RabinCarpFunc(T, P);
-            List<double> times = new List<double>();
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < times; i++)
             {
                 sw = Stopwatch.StartNew();
                 sw.Start();
-                RabinCarp.RabinCarpFunc(T, P);
+                Bruteforce.BruteforceFunc(T, P);
                 sw.Stop();
-                times.Add(sw.ElapsedTicks);
-            }
-            List<double> times2 = new List<double>();
-            for (int i = 0; i < 50; i++)
-            {
+                timesBruteforce.Add((int)sw.ElapsedTicks * 100);
                 sw = Stopwatch.StartNew();
                 sw.Start();
-                RabinCarp.RabinCarpFunc(T1, P1);
+                FSM.FSMFunc(T, P);
                 sw.Stop();
-                times2.Add(sw.ElapsedTicks);
+                timesFSM.Add((int)sw.ElapsedTicks * 100);
+                sw = Stopwatch.StartNew();
+                sw.Start();
+                KMP.KMPFunc(T, P);
+                sw.Stop();
+                timesKMP.Add((int)sw.ElapsedTicks * 100);
+                sw = Stopwatch.StartNew(); 
+                sw.Start();
+                RabinKarp.RabinCarpOptimized(T, P);
+                sw.Stop();
+                timesRabinCarp.Add((int)sw.ElapsedTicks * 100);
+                sw = Stopwatch.StartNew();
+                sw.Start();
+                Sunday.SundayFunc(T, P);
+                sw.Stop();
+                timesSunday.Add((int)sw.ElapsedTicks * 100);
+                T += TCopy;
             }
 
-            using StreamWriter writer = new StreamWriter(path, false);
-            writer.WriteLine("Execution Time, FileName");
-            for (var index = 0; index < times.Count; index++)
+            using StreamWriter writer = new StreamWriter(pathToWrite, false);
+            writer.WriteLine("textSize, RT BruteForce, RT FSM, \tRT KMP, \tRT RabinKarp, RT Sunday");
+            for (var index = 0; index < times; index++)
             {
-                var time = times[index];
-                var time2 = times2[index];
-                writer.WriteLine((int) ((time / Stopwatch.Frequency) * 1000000000) + ", file1.txt");
-                writer.WriteLine((int) ((time2 / Stopwatch.Frequency) * 1000000000) + ", file2.txt");
+                writer.WriteLine(textLength + ",\t   " + timesBruteforce[index] + ",\t   " + timesFSM[index] + ",\t   " + timesKMP[index] + ",\t   " + timesRabinCarp[index] + ",\t   " + timesSunday[index]);
+                textLength += TCopy.Length;
             }
-
-            // Bruteforce.BruteforceFunc(T, P);
-            //
-            // Console.WriteLine((ticks / Stopwatch.Frequency) * 1000000000); // get nanoseconds
         }
     }
 }
